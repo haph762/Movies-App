@@ -29,7 +29,10 @@
         }
     }
     &-title{
+        display: flex;
+        align-items: center;
         font-weight: bold;
         margin: 0.5rem;
+        height: 30px;
     }
 }

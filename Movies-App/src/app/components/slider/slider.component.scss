@@ -34,9 +34,14 @@
             position: absolute;
             top: 5rem;
             left: 4rem;
-            width: 45%;
+            width: 70%;
             .name{
                 font-size: 2.8rem;
+                line-height: 3rem;
+                height: 6rem;
+                white-space: inherit;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .meta{
                 font-size: 1.4rem;
