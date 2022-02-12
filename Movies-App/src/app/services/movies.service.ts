@@ -9,12 +9,24 @@ import { of, switchMap } from 'rxjs';
 export class MoviesService {
 
   baseUrl: string = 'https://api.themoviedb.org/3';
-  apiKey: string = '?api_key=fcaec7a0848972240935ec9d12cb8ed1';
+  apiKey: string = 'fcaec7a0848972240935ec9d12cb8ed1';
   constructor(
     private http: HttpClient,
   ) { }
   getMovies(typeMovie: string = 'upcoming', count: number = 12){
-    return this.http.get<MovieDto>(`${this.baseUrl}/movie/${typeMovie}${this.apiKey}`)
+    return this.http.get<MovieDto>(`${this.baseUrl}/movie/${typeMovie}?api_key=${this.apiKey}`)
+      .pipe(switchMap(res => {
+        return of(res.results.slice(0, count));
+      }));
+  }
+  searchMovie(page: number){
+    return this.http.get<MovieDto>(`${this.baseUrl}/movie/popular?api_key=${this.apiKey}&page=${page}`)
+      .pipe(switchMap(res => {
+        return of(res.results);
+      }));
+  }
+  getTVs(typeLatest: string = 'latest', count: number = 12){
+    return this.http.get<MovieDto>(`${this.baseUrl}/movie/${typeLatest}?api_key=${this.apiKey}`)
       .pipe(switchMap(res => {
         return of(res.results.slice(0, count));
       }));
