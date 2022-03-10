@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs';
 import { Movie } from '../../models/movie';
 import { MoviesService } from '../../services/movies.service';
@@ -17,7 +18,8 @@ export class MoviesComponent implements OnInit {
 
   constructor(
     private moviesService: MoviesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spinnerService: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -32,9 +34,13 @@ export class MoviesComponent implements OnInit {
   }
 
   searchMovies(page: number, searchValue?: string){
+    this.spinnerService.show();
     this.moviesService.searchMovie(page, searchValue).subscribe((movies) => {
       this.movies = movies;
     });
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 500);
   }
   paginate(event: any) {
     const pageNumber = event.page +1;

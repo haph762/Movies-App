@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
     this.moviesService.getMovies('top_rated').subscribe((movies) => {
       this.topRatedMovies = movies;
     });
-    
     setTimeout(() => {
       this.spinnerService.hide();
     }, 500);
