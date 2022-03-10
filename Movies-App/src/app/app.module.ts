@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,7 @@ import {ImageModule} from 'primeng/image';
 import {CarouselModule} from 'primeng/carousel';
 import { GenresComponent } from './pages/genres/genres.component';
 import {InputTextModule} from 'primeng/inputtext';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -44,9 +45,11 @@ import {InputTextModule} from 'primeng/inputtext';
     TabViewModule,
     ImageModule,
     CarouselModule,
-    InputTextModule
+    InputTextModule,
+    NgxSpinnerModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
