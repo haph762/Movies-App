@@ -23,6 +23,7 @@ export class MoviesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.spinnerService.show();
     this.route.params.pipe(take(1)).subscribe(({genreId}) => {
       if(genreId){
         this.genreId = genreId;
@@ -31,6 +32,9 @@ export class MoviesComponent implements OnInit {
         this.searchMovies(1, this.searchValue);
       }
     });
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 500);
   }
 
   searchMovies(page: number, searchValue?: string){

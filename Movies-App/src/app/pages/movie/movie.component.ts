@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs';
 import { IMAGES_SIZES } from 'src/app/constants/images_sizes';
 import { Movie, MovieCredits, MovieImages, MovieVideo } from 'src/app/models/movie';
@@ -20,12 +21,17 @@ export class MovieComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private moviesService: MoviesService, 
+    private spinnerService: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
+    this.spinnerService.show();
     this.route.params.pipe(first()).subscribe(({id}) => {
       this.getDetail(id);
     });
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 500);
   }
   ngOnDestroy(): void {
     console.log('ng ondestroy');
