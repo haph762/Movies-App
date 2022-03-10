@@ -15,11 +15,11 @@ export class HomeComponent implements OnInit {
   topRatedMovies: Movie[] = [];
   constructor(
     private moviesService: MoviesService,
-    private spinner: NgxSpinnerService
+    private spinnerService: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
-    this.spinner.show();
+    this.spinnerService.show();
     this.moviesService.getMovies('popular').subscribe((movies) => {
       this.popularMovies = movies;
     });
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
       this.topRatedMovies = movies;
     });
     setTimeout(() => {
-      this.spinner.hide();
+      this.spinnerService.hide();
     }, 500);
   }
 
