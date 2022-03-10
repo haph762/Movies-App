@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Movie } from '../../models/movie';
 import { MoviesService } from '../../services/movies.service';
 
@@ -14,9 +15,11 @@ export class HomeComponent implements OnInit {
   topRatedMovies: Movie[] = [];
   constructor(
     private moviesService: MoviesService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.moviesService.getMovies('popular').subscribe((movies) => {
       this.popularMovies = movies;
     });
@@ -26,6 +29,9 @@ export class HomeComponent implements OnInit {
     this.moviesService.getMovies('top_rated').subscribe((movies) => {
       this.topRatedMovies = movies;
     });
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 500);
   }
 
 }
